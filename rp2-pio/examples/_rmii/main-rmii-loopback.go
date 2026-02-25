@@ -48,7 +48,7 @@ const (
 // which offload the timing-critical RMII protocol from the CPU.
 type EthernetMAC struct {
 	phy.Device
-	rx piolib.RMIIRx
+	rx piolib.RMIIRxExtClk
 	tx piolib.RMIITxExtClk
 }
 
@@ -94,8 +94,6 @@ func main() {
 	var err error
 	time.Sleep(2 * time.Second)
 	println("=== RMII Loopback Test ===")
-	// var mdio MDIOBitBang
-	// mdio.Configure(pinMDIO, pinMDC, 50_000, true)
 	rmii, err := makeEthernetMAC()
 	if err != nil {
 		panic("creating ethernet MAC: " + err.Error())
